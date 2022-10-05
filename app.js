@@ -1,8 +1,6 @@
 const http = require ('http');
 const fs = require ('fs');
 
-// const { readFile } = require('./read.js')
-const { writeFile } = require('./read.js')
 const { readMyData, readMyDataById, deleteDataById, createData } = require('./Controller/nameController.js')
 const hostname = '127.0.0.1';
 const port = 3000; 

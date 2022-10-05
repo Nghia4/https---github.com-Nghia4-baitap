@@ -1,7 +1,7 @@
 const fs = require ('fs')
 
-const { readFile } = require('../read.js')
-const { writeFile } = require('../read.js')
+const { readFile } = require('../source/read.js')
+const { writeFile } = require('../source/read.js')
 
 const myData = readFile();
 
