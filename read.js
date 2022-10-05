@@ -5,7 +5,7 @@ const fs = require ('fs');
 //    }
    
    function readFile () {
-     const data = fs.readFileSync("../name.json")
+     const data = fs.readFileSync("name.json")
      console.log(data);
      return JSON.parse(data); 
    }

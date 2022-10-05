@@ -1,11 +1,10 @@
-import http from 'http';
-import chalk from 'chalk';
-import fs from 'fs';
+const http = require ('http');
+const fs = require ('fs');
 
 //  import {readFile} from './source/name-data'
 // import {getName} from './nameController/nameController';
 // import { writeFile} from './dataSource/nameDataSource'
-import { readFile } from '../source/name-data'
+const myData = require('./read.js')
 const hostname = '127.0.0.1';
 const port = 3000;
 
@@ -13,8 +12,9 @@ const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
   if (req.url === "/tasks" && req.method === "GET") {
-    const myData = readFile();
-     res.end(JSON.stringify(myData));
+    // const myData = readFile();
+    console.log(myData)
+    res.end(JSON.stringify(myData));
   }else if (req.url === '/tasks' && req.method === "POST") {
        let body = '';
        req.on("data", (chunk) => {
@@ -69,5 +69,5 @@ function writeFile (tasks){
 
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
-  console.log(chalk.blue('Hello') + ' World ' + chalk.red('!'));
+  // console.log(chalk.blue('Hello') + ' World ' + chalk.red('!'));
 })

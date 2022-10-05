@@ -9,7 +9,6 @@
   },
   "keywords": [],
   "author": "",
-  "type": "module",
   "license": "ISC",
   "dependencies": {
     "chalk": "^5.0.1",
