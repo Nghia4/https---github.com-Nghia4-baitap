@@ -4,9 +4,9 @@ const fs = require ('fs');
 //  import {readFile} from './source/name-data'
 // import {getName} from './nameController/nameController';
 // import { writeFile} from './dataSource/nameDataSource'
-const myData = require('./read.js')
+const myData = require('./read.js') // moi doi
 const hostname = '127.0.0.1';
-const port = 3000;
+const port = 3000; 
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
