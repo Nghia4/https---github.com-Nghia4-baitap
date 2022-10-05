@@ -1,10 +1,9 @@
 const http = require ('http');
 const fs = require ('fs');
 
-//  import {readFile} from './source/name-data'
-// import {getName} from './nameController/nameController';
-// import { writeFile} from './dataSource/nameDataSource'
-const myData = require('./read.js') // moi doi
+// const { readFile } = require('./read.js')
+const { writeFile } = require('./read.js')
+const { readMyData, readMyDataById, deleteDataById, createData } = require('./Controller/nameController.js')
 const hostname = '127.0.0.1';
 const port = 3000; 
 
@@ -12,62 +11,18 @@ const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
   if (req.url === "/tasks" && req.method === "GET") {
-    // const myData = readFile();
-    console.log(myData)
-    res.end(JSON.stringify(myData));
+    readMyData(req, res);
   }else if (req.url === '/tasks' && req.method === "POST") {
-       let body = '';
-       req.on("data", (chunk) => {
-        body += chunk.toString();
-       });
-
-       req.on("end",()=> {
-        const tasks = readFile();
-        const task = JSON.parse(body);
-        tasks.push(task);
-        res.end(JSON.stringify(tasks));
-        writeFile(tasks);
-       });
-      } else if ( req.url.match(/\/tasks\/\w+/) && req.method === "GET") {
-        const tasks = readFile();
-
-        const ID = req.url.split('/')[2];
-        const task = tasks.find(item => item.id == ID)
-        res.end(JSON.stringify(task))
-        console.log(ID)
-        
-        console.log(tasks.find(item => item.id == ID))
-
-       } else if (req.url.match(/\/tasks\/\w+/) && req.method === "DELETE") {
-          const tasks = readFile();
-          const ID = req.url.split('/')[2];
-          const taskArray = tasks.filter(item => item.id != ID)
-          res.end(JSON.stringify(taskArray));
-          console.log(taskArray);
-          writeFile(taskArray)
-       } else {
-      res.end('Hello World');
-  
-
+    createData(req,res);
+  } else if ( req.url.match(/\/tasks\/\w+/) && req.method === "GET") {
+    readMyDataById(req,res);
+  } else if (req.url.match(/\/tasks\/\w+/) && req.method === "DELETE") {
+    deleteDataById(req,res)
+  } else {
+    res.end('Hello World');
 }
 });
 
-
-
-
-function writeFile (tasks){
- fs.writeFileSync("name.json", JSON.stringify(tasks))
-}
-
-// function readFile () {
-//   const data = fs.readFileSync("name.json")
-//   console.log(data);
-//   return JSON.parse(data); 
-// }
-
-
-
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
-  // console.log(chalk.blue('Hello') + ' World ' + chalk.red('!'));
 })
