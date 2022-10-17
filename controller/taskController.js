@@ -10,8 +10,12 @@ const myData = readFile();
 
 
 async function readMyData(req, res) {
+
+    const data = req.body
+    
     const user = await User.find()
     console.log(user)
+    console.log(data)
     res.end(JSON.stringify(user))
 }
 
@@ -19,6 +23,7 @@ async function findAndUpdateData(req, res) {
     try {
         const updateData = req.body
         const newDatas = await User.findOneAndUpdate({ _id: updateData._id }, updateData, { new: true });
+        console.log(updateData)
         console.log(newDatas)
         res.end(JSON.stringify(newDatas))
     } catch (error) {

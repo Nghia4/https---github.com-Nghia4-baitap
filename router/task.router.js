@@ -3,7 +3,7 @@ const parseRequestBody = require('../middlewares/middleware.js')
 
 const taskRouter = {
     GET: { 
-        middlewares: [],
+        middlewares: [parseRequestBody],
         controller: taskController.readMyData
     },
     POST: {
